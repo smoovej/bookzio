@@ -44,7 +44,7 @@ class AppController extends Controller {
         $api_key = "aa44ee91a1d9f30dc4ae4e9fdebf0d65";
         $api_secret = "89572de90ebae17d";
         $flickr = new phpFlickr($api_key, $api_secret);
-        $flickr->enableCache("db", "mysql://root:root@localhost:8889/books");
+        $flickr->enableCache("fs", '/tmp/' );
 
         $tags = array ('reading','books','library','fairy tale','story','novel',);
 //                        'seuss','wizard','harry potter','',
