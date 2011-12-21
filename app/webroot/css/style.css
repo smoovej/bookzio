@@ -107,12 +107,23 @@ body {
        background: #1b435e;
        }
 
-input {
+#age {
     border: 3px solid #aaaaaa;
     font-size: 3em;
     -webkit-border-radius: 15px;
     padding: 10px;
     text-align: right;
+}
+
+#age:focus {
+    outline:none;
+    border-color:#9ecaed;
+    box-shadow:0 0 10px #9ecaed;
+    -webkit-transition: width 1s ease;
+    -moz-transition: width 1s ease;
+    -o-transition: width 1s ease;
+    -ms-transition: width 1s ease;
+    transition: width 1s ease;
 }
 
 .container {
