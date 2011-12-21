@@ -78,7 +78,7 @@ class BooksController extends AppController {
                 } else {
                     $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['MediumImage']['URL'];
                 }
-                
+
                 if (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'])) {
                     $book['Book']['amzn_review'] = $detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'];
                 } elseif (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview'][0]['Content'])) {
