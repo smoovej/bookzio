@@ -1,0 +1,1 @@
+<?php echo  $this->Facebook->share('http://www.example.com/url_to_share'); //(default is the current page). ?>
