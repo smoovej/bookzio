@@ -11,7 +11,7 @@
 </head>
 <body>
     <img class="source-image" src="<?php echo $photo_url; ?>" alt="" />
-    <div id="top"><div id="sitename"><?php echo $this->HTML->link('Bookzio',array('/')); ?></div></div>
+    <div id="top"><div id="sitename"><?php echo $this->HTML->link('Bookzio',array('')); ?></div></div>
     <div class="container container_12">
         <?php echo $content_for_layout; ?>
         <div class="clear"></div>
