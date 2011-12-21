@@ -45,8 +45,8 @@ class BooksController extends AppController {
     }
 
     function view($id = null) {
+        $age = isset($this->params['form']['age']) ? $this->params['form']['age'] : null;
         if (empty($id)) {
-            $age = isset($this->params['form']['age']) ? $this->params['form']['age'] : null;
             $book = $this->Book->getRandomBook($age);
         } else {
             $book = $this->Book->find('first', array('conditions' => array('id' => $id),
@@ -73,7 +73,12 @@ class BooksController extends AppController {
 
                 $detail = $amazon->findById($book['Book']['asin']);
 
-                $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['LargeImage']['URL'];
+                if (isset($detail['ItemLookupResponse']['Items']['Item']['LargeImage'])) {
+                    $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['LargeImage']['URL'];
+                } else {
+                    $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['MediumImage']['URL'];
+                }
+                
                 if (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'])) {
                     $book['Book']['amzn_review'] = $detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'];
                 } elseif (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview'][0]['Content'])) {
@@ -139,49 +144,7 @@ class BooksController extends AppController {
     }
 
     function home() {
-        $age = isset($this->params['form']['age']) ? $this->params['form']['age'] : null;
 
-        if (!empty($age)) {
-            $book = $this->Book->getRandomBook($age);
-            $count = 0;
-
-            // Get the ASIN number from amazon via search by title/author
-            while (empty($book['Book']['asin']) && ($count++ < 10)) {
-                App::import('ConnectionManager');
-                $amazon =& ConnectionManager::getDataSource("amazon");
-                $desc = $amazon->find('Books', array('title' => $book['Book']['title'], 'author' => $book['Book']['author']));
-
-                if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN']) || isset($desc['ItemSearchResponse']['Items']['Item'][0]['ASIN'])) {
-                    if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN'])) {
-                        $item = $desc['ItemSearchResponse']['Items']['Item'];
-                    } else {
-                        $item = $desc['ItemSearchResponse']['Items']['Item'][0];
-                    }
-
-                    $book['Book']['asin'] = $item['ASIN'];
-                    $book['Book']['amzn_url'] = $item['DetailPageURL'];
-                    $book['Book']['on_amazon'] = 1;
-
-                    $detail = $amazon->findById($book['Book']['asin']);
-
-                    $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['LargeImage']['URL'];
-                    if (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'])) {
-                        $book['Book']['amzn_review'] = $detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'];
-                    } elseif (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview'][0]['Content'])) {
-                        $book['Book']['amzn_review'] = $detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview'][0]['Content'];
-                    }
-
-                    $this->Book->save($book['Book']);
-                } else {
-                    $book['Book']['on_amazon'] = 0;
-                    $this->Book->save($book['Book']);
-
-                    $book = $this->Book->getRandomBook($age);
-                }
-            }
-
-            $this->set(compact('book', 'desc', 'detail'));
-        }
     }
 
 
