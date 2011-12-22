@@ -54,10 +54,13 @@ class Book extends AppModel {
 	);
 
     public function getRandomBook($age = null) {
+        // Ages greater than 7 need a spread of at least 2
+        $range = ($age < 7) ? 1 : 2;
+
         if (empty($age) || $age > 12) {
             $conditions = array();
         } else {
-            $conditions = array('age BETWEEN ? AND ?' => array($age - 1, $age + 1 ));
+            $conditions = array('age BETWEEN ? AND ?' => array($age - $range, $age + $range ));
         }
 
         return $this->find('first', array('conditions' => $conditions,
@@ -68,6 +71,8 @@ class Book extends AppModel {
     public function loadFromAmazon( $book ) {
         App::import('ConnectionManager');
         $amazon =& ConnectionManager::getDataSource("amazon");
+
+        // Get the ASIN number from amazon via search by title/author
         $desc = $amazon->find('Books', array('title' => $book['Book']['title'], 'author' => $book['Book']['author']));
 
         if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN']) || isset($desc['ItemSearchResponse']['Items']['Item'][0]['ASIN'])) {

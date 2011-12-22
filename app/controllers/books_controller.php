@@ -55,7 +55,7 @@ class BooksController extends AppController {
         }
 
         $count = 0;
-        // Get the ASIN number from amazon via search by title/author
+
         while (empty($book['Book']['on_amazon']) && ($count++ < 10)) {
             $book = $this->Book->loadFromAmazon($book);
 
