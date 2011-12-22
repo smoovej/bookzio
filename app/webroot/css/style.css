@@ -53,6 +53,7 @@ body {
         }
 
         body .byline {
+                font-family: 'Habibi', serif;
                 border-bottom: 1px solid black;
                 margin-bottom: 20px;
             }
