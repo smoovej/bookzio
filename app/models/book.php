@@ -64,4 +64,39 @@ class Book extends AppModel {
                                         'order' => 'RAND()',
                                         'recursive' => -1));
     }
+
+    public function loadFromAmazon( $book ) {
+        App::import('ConnectionManager');
+        $amazon =& ConnectionManager::getDataSource("amazon");
+        $desc = $amazon->find('Books', array('title' => $book['Book']['title'], 'author' => $book['Book']['author']));
+
+        if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN']) || isset($desc['ItemSearchResponse']['Items']['Item'][0]['ASIN'])) {
+            if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN'])) {
+                $item = $desc['ItemSearchResponse']['Items']['Item'];
+            } else {
+                $item = $desc['ItemSearchResponse']['Items']['Item'][0];
+            }
+
+            $book['Book']['asin'] = $item['ASIN'];
+            $book['Book']['amzn_url'] = $item['DetailPageURL'];
+
+            $detail = $amazon->findById($book['Book']['asin']);
+
+            if (isset($detail['ItemLookupResponse']['Items']['Item']['LargeImage'])) {
+                $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['LargeImage']['URL'];
+            } elseif  (isset($detail['ItemLookupResponse']['Items']['Item']['MediumImage'])) {
+                $book['Book']['amzn_image_url'] = $detail['ItemLookupResponse']['Items']['Item']['MediumImage']['URL'];
+            } else {
+                $book['Book']['amzn_image_url'] = null;
+            }
+
+            if (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'])) {
+                $book['Book']['amzn_review'] = $detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview']['Content'];
+            } elseif (isset($detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview'][0]['Content'])) {
+                $book['Book']['amzn_review'] = $detail['ItemLookupResponse']['Items']['Item']['EditorialReviews']['EditorialReview'][0]['Content'];
+            }
+        }
+
+        return $book;
+    }
 }

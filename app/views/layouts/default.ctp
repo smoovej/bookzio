@@ -2,6 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php
+        $api = "ABQIAAAAAMPeJi3jrrgEijI2XaX-shT7g99ROZkAi_Cp-gMUrVuZ_69itRQjnbU3dIFh0hWjduwZYw4BQa0S7w";
+
         echo $this->Html->meta('icon');
         echo $this->Html->css('960.css');
         echo $this->Html->css('style.css');

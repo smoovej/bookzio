@@ -4,7 +4,7 @@
  */
 ?>
 
-<div class="grid_12">
+<div class="grid_12" id="age_question">
     <?php echo $this->Form->create('Book', array('action' => 'recommend')); ?>
     <span class="huge">What's a great book for a&nbsp;</span>
     <?php echo $this->Form->input('age', array(
