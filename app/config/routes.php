@@ -33,3 +33,5 @@ Router::connect('/', array('controller' => 'books', 'action' => 'home'));
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 Router::connect('/recommend', array('controller' => 'books', 'action' => 'recommend'));
+
+Router::connect('/book/*', array('controller' => 'books', 'action' => 'view'));

@@ -41,7 +41,7 @@ class BooksController extends AppController {
 
         // If age is still empty, just pick a random book
         $book = $this->Book->getRandomBook($age);
-        $this->redirect(array('action' => 'view', $book['Book']['id']));
+        $this->redirect('/book/' . $book['Book']['id']);
     }
 
     function view($id = null) {
