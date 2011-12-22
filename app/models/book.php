@@ -75,13 +75,19 @@ class Book extends AppModel {
         // Get the ASIN number from amazon via search by title/author
         $desc = $amazon->find('Books', array('title' => $book['Book']['title'], 'author' => $book['Book']['author']));
 
-        if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN']) || isset($desc['ItemSearchResponse']['Items']['Item'][0]['ASIN'])) {
-            if (isset($desc['ItemSearchResponse']['Items']['Item']['ASIN'])) {
-                $item = $desc['ItemSearchResponse']['Items']['Item'];
-            } else {
-                $item = $desc['ItemSearchResponse']['Items']['Item'][0];
+        // If there are multiple items, we want a BOOK (not an eBook)
+        if ($desc['ItemSearchResponse']['Items']['TotalResults'] > 1) {
+            foreach ($desc['ItemSearchResponse']['Items']['Item'] AS $result) {
+                if ($result['ItemAttributes']['ProductGroup'] == 'Book') {
+                    $item = $result;
+                    break;
+                }
             }
+        } else {
+            $item = $desc['ItemSearchResponse']['Items']['Item'];
+        }
 
+        if (isset($item['ASIN'])) {
             $book['Book']['asin'] = $item['ASIN'];
             $book['Book']['amzn_url'] = $item['DetailPageURL'];
 
