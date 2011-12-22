@@ -12,6 +12,11 @@ body {
 	margin: 0;
 }
 
+    body .center {
+        text-align: center;
+        vertical-align: middle;
+    }
+
     body .source-image {
         width: 100%;
         height: 100%;
@@ -19,6 +24,7 @@ body {
         top: 0;
         left: 0;
         z-index: -1000;
+        background-attachment:fixed;
     }
 
     body .huge {
@@ -46,18 +52,18 @@ body {
             text-shadow: 1px 1px 7px #ccc;
         }
 
-        body #book {
-            font-family: 'Habibi', serif;
-        }
-
-            body #book #byline {
+        body .byline {
                 border-bottom: 1px solid black;
                 margin-bottom: 20px;
             }
 
-                body #book #byline #title{
+                body .byline #title{
                     font-size: 2em;
                 }
+
+        body #book {
+            font-family: 'Habibi', serif;
+        }
 
             body #book .cover {
                 -moz-box-shadow: 3px 3px 10px #111;
@@ -68,8 +74,8 @@ body {
             }
 
             body #book .description {
-                line-height: 1.4em;
-                font-size: 1.3em;
+                line-height: 1.6em;
+                font-size: 1.4em;
             }
 
             body #age_question {
@@ -80,35 +86,26 @@ body {
     margin-top: 40px;
 }
 .button {
-   border-top: 1px solid #96d1f8;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   padding: 11.5px 23px;
-   -webkit-border-radius: 12px;
-   -moz-border-radius: 12px;
-   border-radius: 12px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: white;
-   font-size: 1.3em;
-    font-family: 'Habibi', serif;
-   text-decoration: none;
-   vertical-align: middle;
+    border: 2px solid #a9a9a9;
+    background: #eeeeee;
+    color: #555;
+    padding: 7px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    font-family: 'Helvetica', serif;
+    text-decoration: none;
+    vertical-align: middle;
    }
+
     .button:hover {
-       border-top-color: #28597a;
-       background: #28597a;
-       color: #ccc;
-       }
+       background: #dddddd;
+       border: 2px solid #666;
+    }
+
     .button:active {
-       border-top-color: #1b435e;
-       background: #1b435e;
+       background: #ffffff;
        }
 
 #age {
