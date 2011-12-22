@@ -46,18 +46,21 @@ class AppController extends Controller {
         $flickr = new phpFlickr($api_key, $api_secret);
         $flickr->enableCache("fs", '/tmp/' );
 
-        $tags = array ('reading','books','library','fairy tale','story','novel',);
+        $tags = array ('reading','books','library','fairy tale','story','novel','tale','writing','poetry');
 //                        'seuss','wizard','harry potter','',
 //                        'bokeh','exploration','adventure','inspiration','imagination');
-//        $tags = array('novel');
+//        $tags = array('nursery rhyme');
 
-        $random_tag_index = array_rand($tags,1);
+        $tag = $tags[array_rand($tags,1)];
 
         $result = $flickr->photos_search(array(
-                                            'tags' => $tags[$random_tag_index],
+                                            'tags' => $tag,
                                             'tag_mode' => 'all',
                                             'sort' => 'interestingness-desc',
                                             'per_page' => 50,
+                                            'safe_search' => 1,
+                                            'content_type' => 1,
+
                                             'media' => 'photos'));
 //        debug($result, true, true);
         $max_results = count($result['photo']);
@@ -70,5 +73,6 @@ class AppController extends Controller {
             $photo_url = $photo_info[3]['source'];
         }
         $this->set('photo_url', $photo_url);
+        $this->set('flickr_tag', $tag);
     }
 }
