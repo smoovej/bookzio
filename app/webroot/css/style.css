@@ -135,6 +135,8 @@ body {
     margin-top: 100px;
     background: #f4f4f4;
    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
     padding: 30px;
     -moz-box-shadow: 3px 3px 10px #111;
     -webkit-box-shadow: 3px 3px 10px #111;
