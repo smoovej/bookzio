@@ -5,7 +5,10 @@
         <div id="author">by <?php echo $book['Book']['author']; ?></div>
     </div>
 </div>
-<div class="grid_1 center"><?php echo $this->HTML->image('refresh.png', array('url' => '/recommend'));?></div>
+<div class="grid_1 center">
+    <?php echo $this->HTML->image('refresh.png', array('url' => '/recommend'));?>
+    <div class="tiny">Otra vez!</div>
+</div>
 <div class="clear">&nbsp;</div>
 
 <div class="grid_1">&nbsp;</div>
