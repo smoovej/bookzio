@@ -67,7 +67,7 @@ class BooksController extends AppController {
 
                 // In case we've had to pull another random book...
                 if ($id != $book['Book']['id']) {
-                    $this->redirect(array('action' => 'view', $book['Book']['id']));
+                    $this->redirect('/book/' . $book['Book']['id']);
                 }
             } else {
                 $book['Book']['on_amazon'] = 0;
