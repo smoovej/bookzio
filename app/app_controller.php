@@ -37,8 +37,8 @@ class AppController extends Controller {
 
 //	var $components = array('Facebook.Connect');
 
-    public function beforeFilter() {
-        parent::beforeFilter();
+    public function beforeRender() {
+        parent::beforeRender();
 
         App::import('Vendor', 'phpflickr/phpflickr');
         $api_key = "aa44ee91a1d9f30dc4ae4e9fdebf0d65";

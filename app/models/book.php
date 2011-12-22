@@ -84,7 +84,13 @@ class Book extends AppModel {
                 }
             }
         } else {
-            $item = $desc['ItemSearchResponse']['Items']['Item'];
+            if (isset($desc['ItemSearchResponse']['Items']['Item'])) {
+                // There's one item in the resultset
+                $item = $desc['ItemSearchResponse']['Items']['Item'];
+            } else {
+                // The result set returned no items.
+                return $book;
+            }
         }
 
         if (isset($item['ASIN'])) {
