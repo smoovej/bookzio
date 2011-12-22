@@ -57,10 +57,12 @@ class Book extends AppModel {
         // Ages greater than 7 need a spread of at least 2
         $range = ($age < 7) ? 1 : 2;
 
-        if (empty($age) || $age > 12) {
+        if (empty($age)) {
             $conditions = array();
-        } else {
+        } elseif ($age < 12) {
             $conditions = array('age BETWEEN ? AND ?' => array($age - $range, $age + $range ));
+        } else {
+            $conditions = array('age >= 12');
         }
 
         return $this->find('first', array('conditions' => $conditions,
