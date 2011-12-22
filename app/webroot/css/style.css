@@ -52,6 +52,11 @@ body {
             text-shadow: 1px 1px 7px #ccc;
         }
 
+            body #top #sitename a:hover {
+                text-shadow: 3px 3px 7px #add8e6;
+                /*color: #add8e6;*/
+            }
+
         body .byline {
                 font-family: 'Habibi', serif;
                 border-bottom: 1px solid black;
@@ -104,7 +109,7 @@ body {
         background: #ffffff;
         border: 2px solid #666;
         color: #333;
-        -moz-box-shadow: 1px 1px 5px #111;
+        -moz-box-shadow: 1px 1px 3px #111;
         -webkit-box-shadow: 1px 1px 5px #111;
         box-shadow: 1px 1px 5px #111;
     }
