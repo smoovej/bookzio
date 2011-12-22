@@ -115,6 +115,8 @@ body {
     border: 3px solid #aaaaaa;
     font-size: 3em;
     -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
     padding: 10px;
     text-align: right;
 }
