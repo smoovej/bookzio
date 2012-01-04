@@ -39,6 +39,12 @@ date_default_timezone_set('America/Denver');
 	Configure::write('debug', 2);
 
 /**
+ * Goodreads API key
+ */
+//key: ngXhPMkYeLUXsvddUvLDFA
+//secret: vKcRSahmDzFeBcF8j7QyjzulrvNgUEbsHFgm0Jrw
+
+/**
  * CakePHP Log Level:
  *
  * In case of Production Mode CakePHP gives you the possibility to continue logging errors.
