@@ -22,7 +22,8 @@
 </div>
 <div class="row">
     <div id="checkout">
-        <div class="one column offset-by-six"><?php echo $this->HTML->link("Library Search", "http://www.worldcat.org/search?q=" . urlencode($book['Book']['title']) . "&qt=advanced", array('class' => 'blue nice button radius' ));?></div>
-        <div class="one column"><?php echo $this->HTML->link('View on Amazon', $book['Book']['amzn_url'], array('class' => 'blue nice button radius' ));?></div>
+        <div class="three columns offset-by-five"><?php echo $this->HTML->link("Library Search", "http://www.worldcat.org/search?q=" . urlencode($book['Book']['title']) . "&qt=advanced", array('class' => 'blue nice button radius' ));?></div>
+        <div class="three columns"><?php echo $this->HTML->link('View on Amazon', $book['Book']['amzn_url'], array('class' => 'blue nice button radius' ));?></div>
+        <div class="one columns">&nbsp;</div>
     </div>
 </div>
