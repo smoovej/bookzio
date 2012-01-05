@@ -8,7 +8,7 @@
         echo $this->Html->css('app.css');
         echo $this->Html->css('foundation.css');
         echo $this->Html->css('ie.css');
-        echo $this->Html->css('style.css');
+        echo $this->Html->css('style.css?foundation');
     ?>
     <link href='http://fonts.googleapis.com/css?family=Habibi' rel='stylesheet' type='text/css'>
     <title><?php echo $title_for_layout; ?></title>
