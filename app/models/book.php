@@ -54,6 +54,10 @@ class Book extends AppModel {
 	);
 
     public function getRandomBook($age = null) {
+        if ($age) {
+            $age = round($age);
+        }
+
         // Ages greater than 7 need a spread of at least 2
         $range = ($age < 7) ? 1 : 2;
 
